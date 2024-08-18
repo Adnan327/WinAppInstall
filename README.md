@@ -1,6 +1,45 @@
 # Windows App Utility
 
-This is a very basic script to install the main apps after a fresh windows install.
+This is my very first projekt. This project contains a basic script where you can choose if you want that app/tool or not by simply pressing Y (yes) or N (no).
+
+
+## List of apps:
+
+**Browser**
+- Google Chrome
+- Firefox
+- Brave
+
+**Development**
+- Visual Studio Code
+- Git
+- Oracle.jdk.22
+- Powershell
+- Windows Terminal
+- Virtual Box
+
+**Document**
+- Office 365
+- LibreOffice
+- Notepad++
+- Obsidian
+- Anki
+
+**Communication**
+- Discord
+
+**Multimedia**
+- VLC media player
+- iTunes
+- OBS Studio
+
+**Tools**
+- 7zip
+- TranslucentTB
+- Microsoft Powertoys
+- Quicklook
+
+
 
 ## How to run the Installer
 
