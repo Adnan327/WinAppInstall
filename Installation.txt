@@ -1,0 +1,4 @@
+#Folgende Befehle vor der Ausführung in das Terminal kopieren
+
+Set-ExecutionPolicy RemoteSigned
+
