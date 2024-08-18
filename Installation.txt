@@ -1,4 +1,14 @@
-#Folgende Befehle vor der Ausführung in das Terminal kopieren
+#Execute the following commands in powershell
 
-Set-ExecutionPolicy RemoteSigned
+1. Set-ExecutionPolicy RemoteSigned
+
+2. irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.ps1 | iex
+
+#Else download zip:
+
+1. https://codeload.github.com/Adnan327/WinAppInstall/zip/refs/heads/main
+
+2. Execute with Powershell
+
+
 
