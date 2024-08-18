@@ -1,6 +1,8 @@
+# Windows App Utility
+
 This is a very basic script to install the main apps after a fresh windows install.
 
-# How to run the Installer
+## How to run the Installer
 
 1. Run Powershell as administrator
 
@@ -11,7 +13,7 @@ irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.
 
 
 
-# Run via download file
+## Run via download file
 
 1. Download zip at https://codeload.github.com/Adnan327/WinAppInstall/zip/refs/heads/main
 
