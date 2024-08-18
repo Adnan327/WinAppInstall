@@ -1,6 +1,6 @@
 # Windows App Utility
 
-This is my very first projekt. This project contains a basic script where you can choose if you want that app/tool or not by simply pressing Y (yes) or N (no).
+This is my very first project. This project contains a basic script where you can choose if you want that app/tool or not by simply pressing Y (yes) or N (no).
 
 
 ## List of apps:
