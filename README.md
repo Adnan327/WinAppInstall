@@ -45,7 +45,7 @@ This is my very first project. This project contains a basic script where you ca
 
 1. Run Powershell as administrator
 
-2. Run the command
+2. Copy/paste the command into Powershell
 ```Powershell
 irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.ps1 | iex
 ```
