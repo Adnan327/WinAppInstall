@@ -9,6 +9,8 @@ This is a very basic script to install the main apps after a fresh windows insta
 irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.ps1 | iex
 ```
 
+
+
 # Run via download file
 
 1. Download zip at https://codeload.github.com/Adnan327/WinAppInstall/zip/refs/heads/main
