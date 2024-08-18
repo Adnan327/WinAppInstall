@@ -1,6 +1,7 @@
 # Windows App Utility
 
 This is my very first project. This project contains a basic script where you can choose if you want that app/tool or not by simply pressing Y (yes) or N (no). The main idea was to make it easier and faster to install all the apps again after a fresh install of windows. I used the commands from the package manager 'winget' which also makes it very easy to update all the installed apps.
+
 I am open to suggestions for improvement.
 
 
