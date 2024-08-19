@@ -20,7 +20,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($chrome -eq 'Y' -or $chrome -eq 'y') {
         Write-Host "'Google Chrome' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..." 
-        #winget install Google.Chrome -h --accept-package-agreements --accept-source-agreements
+        winget install Google.Chrome -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -32,7 +32,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($firefox -eq 'Y' -or $firefox -eq 'y') {
         Write-Host "'Firefox' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..." 
-        #winget install Mozilla.Firefox -h --accept-package-agreements --accept-source-agreements
+        winget install Mozilla.Firefox -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -44,7 +44,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($brave -eq 'Y' -or $brave -eq 'y') {
         Write-Host "'Brave' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Brave.Brave -h --accept-package-agreements --accept-source-agreements
+        winget install Brave.Brave -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     } else {
         Write-Host ""
@@ -69,7 +69,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($vscode -eq 'Y' -or $vscode -eq 'y') {
         Write-Host "'Visual Studio Code' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Microsoft.VisualStudioCode -h --accept-package-agreements --accept-source-agreements
+        winget install Microsoft.VisualStudioCode -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -81,7 +81,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($git -eq 'Y' -or $git -eq 'y') {   
         Write-Host "'Git' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Git.Git -h --accept-package-agreements --accept-source-agreements
+        winget install Git.Git -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -93,7 +93,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($jdk22 -eq 'Y' -or $jdk22 -eq 'y') { 
         Write-Host "'Oracle.jdk.22' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Oracle.JDK.22 -h --accept-package-agreements --accept-source-agreements
+        winget install Oracle.JDK.22 -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
     # install Powershell
@@ -104,7 +104,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($powershell -eq 'Y' -or $powershell -eq 'y') { 
         Write-Host "'Powershell' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Microsoft.PowerShell -h --accept-package-agreements --accept-source-agreements
+        winget install Microsoft.PowerShell -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -116,7 +116,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($winterminal -eq 'Y' -or $winterminal -eq 'y') { 
         Write-Host "'Windows Terminal' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Microsoft.WindowsTerminal -h --accept-package-agreements --accept-source-agreements
+        winget install Microsoft.WindowsTerminal -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -128,7 +128,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($vb -eq 'Y' -or $vb -eq 'y') { 
         Write-Host "'VirtualBox' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install VirtualBox Oracle.VirtualBox 
+        winget install VirtualBox Oracle.VirtualBox 
         Write-Host ""
     } else {
         Write-Host ""
@@ -153,7 +153,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($office365 -eq 'Y' -or $office365 -eq 'y') { 
         Write-Host "'Office365' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Microsoft.Office -h --accept-package-agreements --accept-source-agreements
+        winget install Microsoft.Office -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -165,7 +165,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($libre -eq 'Y' -or $libre -eq 'y') { 
         Write-Host "'LibreOffice' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install TheDocumentFoundation.LibreOffice -h --accept-package-agreements --accept-source-agreements
+        winget install TheDocumentFoundation.LibreOffice -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -177,7 +177,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($notepadqq -eq 'Y' -or $notepadqq -eq 'y') {   
         Write-Host "'Notepad++' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Notepad++.Notepad++ -h --accept-package-agreements --accept-source-agreements
+        winget install Notepad++.Notepad++ -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -189,7 +189,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($obsidian -eq 'Y' -or $obsidian -eq 'y') { 
         Write-Host "'Obsidian' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Obsidian.Obsidian -h --accept-package-agreements --accept-source-agreements
+        winget install Obsidian.Obsidian -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -201,7 +201,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($anki -eq 'Y' -or $anki -eq 'y') { 
         Write-Host "'Anki' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Anki.Anki -h --accept-package-agreements --accept-source-agreements
+        winget install Anki.Anki -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     } else {
         Write-Host ""
@@ -226,7 +226,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($discord -eq 'Y' -or $discord -eq 'y') { 
         Write-Host "'Discord' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Discord.Discord -h --accept-package-agreements --accept-source-agreements
+        winget install Discord.Discord -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     } else {
         Write-Host ""
@@ -251,7 +251,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($vlc -eq 'Y' -or $vlc -eq 'y') {
         Write-Host "'VLC media player' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install VideoLAN.VLC -h --accept-package-agreements --accept-source-agreements
+        winget install VideoLAN.VLC -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -263,7 +263,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($itunes -eq 'Y' -or $itunes -eq 'y') {
         Write-Host "'iTunes' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Apple.iTunes -h --accept-package-agreements --accept-source-agreements
+        winget install Apple.iTunes -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -275,7 +275,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($obs -eq 'Y' -or $obs -eq 'y') {
         Write-Host "'OBS Studio' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install OBSProject.OBSStudio -h --accept-package-agreements --accept-source-agreements
+        winget install OBSProject.OBSStudio -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     } else {
         Write-Host ""
@@ -301,7 +301,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($7zip -eq 'Y' -or $7zip -eq 'y') {
         Write-Host "'7zip' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install 7zip.7zip -h --accept-package-agreements --accept-source-agreements
+        winget install 7zip.7zip -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -313,7 +313,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($translucent -eq 'Y' -or $translucent -eq 'y') {
         Write-Host "'TranslucentTB' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install CharlesMilette.TranslucentTB -h --accept-package-agreements --accept-source-agreements
+        winget install CharlesMilette.TranslucentTB -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -325,7 +325,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($powertoys -eq 'Y' -or $powertoys -eq 'y') {
         Write-Host "'Microsoft Powertoys' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install Microsoft.PowerToys -h --accept-package-agreements --accept-source-agreements
+        winget install Microsoft.PowerToys -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     }
 
@@ -337,7 +337,7 @@ if ($input1 -eq 'Y' -or $input1 -eq 'y') {
     if ($quicklook -eq 'Y' -or $quicklook -eq 'y') {
         Write-Host "'QuickLook' " -ForegroundColor Yellow -NoNewline
         Write-Host "wird installiert..."
-        #winget install QL-Win.QuickLook -h --accept-package-agreements --accept-source-agreements
+        winget install QL-Win.QuickLook -h --accept-package-agreements --accept-source-agreements
         Write-Host ""
     } else {
         Write-Host ""
