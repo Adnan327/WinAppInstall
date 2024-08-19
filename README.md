@@ -63,7 +63,7 @@ irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.
 3. Run the script 'WinAppInstall.ps1' as administrator
 
 
-## How keep the apps up to date
+## How to keep the apps up to date
 To update all the apps, use this command
 ```
 winget upgrade --all
