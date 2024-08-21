@@ -53,7 +53,7 @@ irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.
 ```
 Installer with GUI
 ```Powershell
-irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.ps1](https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstallGUI.ps1 | iex
+irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstallGUI.ps1 | iex
 ```
 
 
