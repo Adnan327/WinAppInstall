@@ -51,7 +51,7 @@ I am open to suggestions for improvement.
 ```Powershell
 irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.ps1 | iex
 ```
-
+Installer with GUI
 ```Powershell
 irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.ps1](https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstallGUI.ps1 | iex
 ```
