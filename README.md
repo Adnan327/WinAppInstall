@@ -47,11 +47,14 @@ I am open to suggestions for improvement.
 
 1. Run Powershell as administrator
 
-2. Copy/paste the command into Powershell
+2. Copy/paste one of these command into Powershell
 ```Powershell
 irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.ps1 | iex
 ```
 
+```Powershell
+irm https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstall.ps1](https://raw.githubusercontent.com/Adnan327/WinAppInstall/main/WinAppInstallGUI.ps1 | iex
+```
 
 
 ## Run via download file
