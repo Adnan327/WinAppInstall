@@ -2,7 +2,11 @@
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-$line = "------------------------------------------------------------------------" 
+
+$line = ""
+for ($i = 0; $i -lt 72; $i++) {
+    $line = $line + "-"
+} 
 
 #Setting font/font-size
 $header = New-Object System.Drawing.Font("Arial", 12)
@@ -15,6 +19,11 @@ $Form.Size = New-Object System.Drawing.Size(1556, 350)
 $Form.StartPosition = "CenterScreen"
 $Form.BackColor = [System.Drawing.Color]::FromArgb(50, 50, 50)              # Dark grey background
 $Form.FormBorderStyle = [System.Windows.Forms.FormBorderStyle]::FixedSingle # window not extendable
+
+# Load the custom icon
+$iconPath = ".\Pictures\Install-icon.ico"
+$icon = [System.Drawing.Icon]::ExtractAssociatedIcon($iconPath)
+$form.Icon = $icon
 
 # Farbschema für Dark Mode
 $textColor = [System.Drawing.Color]::White
@@ -126,6 +135,14 @@ $vbox.Location = New-Object System.Drawing.Point(5,140)
 $vbox.AutoSize = $true
 $vbox.Font = $font
 $panel2.Controls.Add($vbox)
+
+# Racket
+$racket = New-Object System.Windows.Forms.CheckBox
+$racket.Text = "Racket"
+$racket.Location = New-Object System.Drawing.Point(5,160)
+$racket.AutoSize = $true
+$racket.Font = $font
+$panel2.Controls.Add($racket)
 
 # -------------------------------------------Document-------------------------------------------
 # 3rd panel
@@ -341,6 +358,22 @@ $speedtest.AutoSize = $true
 $speedtest.Font = $font
 $panel7.Controls.Add($speedtest)
 
+# Garmin Express
+$garmin = New-Object System.Windows.Forms.CheckBox
+$garmin.Text = "Garmin Express"
+$garmin.Location = New-Object System.Drawing.Point(5,140)
+$garmin.AutoSize = $true
+$garmin.Font = $font
+$panel7.Controls.Add($garmin)
+
+# Oh-my-posh
+$posh = New-Object System.Windows.Forms.CheckBox
+$posh.Text = "Oh-my-posh"
+$posh.Location = New-Object System.Drawing.Point(5,160)
+$posh.AutoSize = $true
+$posh.Font = $font
+$panel7.Controls.Add($posh)
+
 # --------------------------------------------Button---------------------------------------------
 
 # Update
@@ -395,164 +428,182 @@ $install.Add_Click({
         Write-Host "Installing " -NoNewline
         Write-Host "'Firefox'" -NoNewline -ForegroundColor Yellow 
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Mozilla.Firefox --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Mozilla.Firefox -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($chrome.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Google Chrome'" -NoNewline -ForegroundColor Yellow
         Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Google.Chrome --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Google.Chrome -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($brave.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Brave'" -NoNewline -ForegroundColor Yellow
         Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Brave.Brave --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Brave.Brave -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     # Development
     if ($vscode.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Visual Studio Code'" -NoNewline -ForegroundColor Yellow
         Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.VisualStudioCode --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.VisualStudioCode -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($git.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Git'" -NoNewline -ForegroundColor Yellow
         Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Git.Git --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Git.Git -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($jdk22.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Oracle.jdk.22'" -NoNewline -ForegroundColor Yellow
         Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Oracle.JDK.22 --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Oracle.JDK.22 -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($powershell.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Powershell'" -NoNewline -ForegroundColor Yellow
         Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.PowerShell --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.PowerShell -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($winterminal.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Windows Terminal'" -NoNewline -ForegroundColor Yellow
         Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.WindowsTerminal --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.WindowsTerminal -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($vbox.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'VirtualBox'" -NoNewline -ForegroundColor Yellow
         Write-Host "..."    
-        Start-Process -FilePath "winget" -ArgumentList "install Oracle.VirtualBox --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Oracle.VirtualBox -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+    }
+    if ($racket.Checked) {
+        Write-Host "Installing " -NoNewline
+        Write-Host "'Racket'" -NoNewline -ForegroundColor Yellow
+        Write-Host "..."    
+        Start-Process -FilePath "winget" -ArgumentList "install Racket.Racket -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     # Document
     if ($office365.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Office 365'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.Office --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.Office -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($libreoffice.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'LibreOffice'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install TheDocumentFoundation.LibreOffice --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install TheDocumentFoundation.LibreOffice -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($notepadqq.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Notepad++'" -NoNewline -ForegroundColor Yellow
         Write-Host "..."     
-        Start-Process -FilePath "winget" -ArgumentList "install Notepad++.Notepad++ --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Notepad++.Notepad++ -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($obsidian.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Obsidian'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Obsidian.Obsidian --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Obsidian.Obsidian -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($notion.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Notion'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Notion.Notion --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Notion.Notion -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($anki.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Anki'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Anki.Anki --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Anki.Anki -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     # Communication
     if ($discord.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Discord'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Discord.Discord --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Discord.Discord -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     # Multimedia
     if ($vlc.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'VLC media player'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install VideoLAN.VLC --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install VideoLAN.VLC -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($itunes.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'iTunes'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Apple.iTunes --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Apple.iTunes -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($obs.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'OBS Studio'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install OBSProject.OBSStudio --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install OBSProject.OBSStudio -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     # Gaming
     if ($steam.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Steam'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Valve.Steam --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Valve.Steam -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($epic.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Epic Games Launcher'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install EpicGames.EpicGamesLauncher --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install EpicGames.EpicGamesLauncher -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     # Tools
     if ($7zip.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'7zip'" -NoNewline -ForegroundColor Yellow -Verbose
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install 7zip.7zip --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install 7zip.7zip -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($translucentTB.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'TranslucentTB'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install CharlesMilette.TranslucentTB --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install CharlesMilette.TranslucentTB -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
 
     }
     if ($powertoys.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Microsoft Powertoys'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.PowerToys --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.PowerToys -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($quicklook.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'QuickLook'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install QL-Win.QuickLook --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install QL-Win.QuickLook -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     if ($speedtest.Checked) {
         Write-Host "Installing " -NoNewline
         Write-Host "'Speedtest by Ookla'" -NoNewline -ForegroundColor Yellow
         Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Ookla.Speedtest.Desktop --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        Start-Process -FilePath "winget" -ArgumentList "install Ookla.Speedtest.Desktop -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+    }
+    if ($garmin.Checked) {
+        Write-Host "Installing " -NoNewline
+        Write-Host "'Garmin Express'" -NoNewline -ForegroundColor Yellow
+        Write-Host "..." 
+        Start-Process -FilePath "winget" -ArgumentList "install Garmin.Express -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+    }
+    if ($posh.Checked) {
+        Write-Host "Installing " -NoNewline
+        Write-Host "'Oh-my-posh'" -NoNewline -ForegroundColor Yellow
+        Write-Host "..." 
+        Start-Process -FilePath "winget" -ArgumentList "install JanDeDobbeleer.OhMyPosh -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
     }
     Start-Sleep -Seconds 1
     Write-Host $line -ForegroundColor Blue
@@ -562,38 +613,44 @@ $install.Add_Click({
 
 # Check my button when clicked
 $my.Add_Click({
-     # Browser
-     $firefox.Checked = $true
-     #$chrome.Checked = $true
-     $brave.Checked = $true
-     # Development
-     $vscode.Checked = $true
-     $git.Checked = $true
-     $jdk22.Checked = $true
-     $powershell.Checked = $true
-     $winterminal.Checked = $true
-     $vbox.Checked = $true
-     # Document
-     #$office365.Checked = $true
-     #$libreoffice.Checked = $true
-     $notepadqq.Checked = $true
-     $obsidian.Checked = $true
-     $notion.Checked = $true
-     $anki.Checked = $true
-     # Communication
-     $discord.Checked = $true
-     # Multimedia
-     $vlc.Checked = $true
-     $itunes.Checked = $true
-     #$obs.Checked = $true
-     # Tools
-     $7zip.Checked = $true
-     $translucentTB.Checked = $true
-     $powertoys.Checked = $true
-     $quicklook.Checked = $true
-     $speedtest.Checked = $true
- 
-     Write-Host "Checked boxes from author"
+    # Browser
+    $firefox.Checked = $true
+    $chrome.Checked = $false
+    $brave.Checked = $true
+    # Development
+    $vscode.Checked = $true
+    $git.Checked = $true
+    $jdk22.Checked = $true
+    $powershell.Checked = $true
+    $winterminal.Checked = $true
+    $vbox.Checked = $true
+    $racket.Checked = $true
+    # Document
+    $office365.Checked = $false
+    $libreoffice.Checked = $false
+    $notepadqq.Checked = $true
+    $obsidian.Checked = $true
+    $notion.Checked = $true
+    $anki.Checked = $true
+    # Communication
+    $discord.Checked = $true
+    # Gaming
+    $steam.Checked = $false
+    $epic.Checked = $false
+    # Multimedia
+    $vlc.Checked = $true
+    $itunes.Checked = $true
+    $obs.Checked = $false
+    # Tools
+    $7zip.Checked = $true
+    $translucentTB.Checked = $true
+    $powertoys.Checked = $true
+    $quicklook.Checked = $true
+    $speedtest.Checked = $true
+    $garmin.Checked = $true
+    $posh.Checked = $true  
+
+    Write-Host "Checked authors boxes"
 })
 
 # Check all button when clicked
@@ -609,6 +666,7 @@ $all.Add_Click({
     $powershell.Checked = $true
     $winterminal.Checked = $true
     $vbox.Checked = $true
+    $racket.Checked = $true
     # Document
     $office365.Checked = $true
     $libreoffice.Checked = $true
@@ -618,6 +676,9 @@ $all.Add_Click({
     $anki.Checked = $true
     # Communication
     $discord.Checked = $true
+    # Gaming
+    $steam.Checked = $true
+    $epic.Checked = $true
     # Multimedia
     $vlc.Checked = $true
     $itunes.Checked = $true
@@ -628,13 +689,16 @@ $all.Add_Click({
     $powertoys.Checked = $true
     $quicklook.Checked = $true
     $speedtest.Checked = $true
+    $garmin.Checked = $true
+    $posh.Checked = $true
 
     Write-Host "Checked all boxes" 
 })   
 
 # Update button when clicked
 $update.Add_Click({
-    winget upgrade --all        # Update all apps via winget
+    # Update all apps via winget
+    Start-Process -FilePath "winget" -ArgumentList "upgrade --all" -NoNewWindow -Wait -PassThru
 })
 
 # Finish button when clicked
