@@ -1,16 +1,10 @@
-
 Add-Type -AssemblyName System.Windows.Forms
 Add-Type -AssemblyName System.Drawing
 
-
 $line = ""
-for ($i = 0; $i -lt 72; $i++) {
-    $line = $line + "-"
+for ($i = 0; $i -lt 120; $i++) {
+    $line = $line + "="
 } 
-
-#Setting font/font-size
-$header = New-Object System.Drawing.Font("Arial", 12)
-$font = New-Object System.Drawing.Font("Arial", 11)
 
 # Create a new form
 $Form = New-Object System.Windows.Forms.Form
@@ -25,589 +19,393 @@ $iconPath = ".\Pictures\Install-icon.ico"
 $icon = [System.Drawing.Icon]::ExtractAssociatedIcon($iconPath)
 $form.Icon = $icon
 
-# Farbschema für Dark Mode
-$textColor = [System.Drawing.Color]::White
-$buttonColor = [System.Drawing.Color]::FromArgb(70, 70, 70)
+# Function to create panels
+function New-panel {
+    param (
+        [int]$width,
+        [int]$height,
+        [int]$x,
+        [int]$y,
+        [string]$backcolor
+    )
+    # create new panel-objekt
+    $panel = New-Object System.Windows.Forms.Panel
+    $panel.Size = New-Object System.Drawing.Size($width,$height)
+    $panel.Location = New-Object System.Drawing.Point($x, $y)
+    $panel.BackColor = "LightGray"
 
+    # return the created panel
+    return $panel
+}
+# function to create a new header
+function New-header {
+    param (
+        [string]$name,
+        [int]$x,
+        [int]$y
+    )
+    $header = New-Object System.Windows.Forms.Label
+    $header.Text = "$name" 
+    $header.Location = New-Object System.Drawing.Point($x,$y)
+    $header.AutoSize = $true
+    $header.Font = New-Object System.Drawing.Font("Arial", 12)  
+
+    return $header
+}
+# function to create a new app
+function New-app {
+    param (
+        [string]$name,
+        [int]$x,
+        [int]$y
+    )
+    $app = New-Object System.Windows.Forms.CheckBox             # Create Checkbox
+    $app.Text = "$name"                                         # Text
+    $app.Location = New-Object System.Drawing.Point($x,$y)      # Location
+    $app.AutoSize = $true                                       # Size of textfield
+    $app.Font = New-Object System.Drawing.Font("Arial", 11)     # Font/font-size
+
+    return $app
+}
 # -------------------------------------------Browser---------------------------------------------
 
-# 1st panel
-$panel = New-Object System.Windows.Forms.Panel
-$panel.Size = New-Object System.Drawing.Size(200,250)
-$panel.Location = New-Object System.Drawing.Point(10, 10)
-$panel.BackColor = "LightGray"
-$Form.Controls.Add($panel)
+$panel1 = New-panel -width 200 -height 250 -x 10 -y 10 -backcolor "LightGray"
+$Form.Controls.Add($panel1)
 
 #--------Header--------
-$browser = New-Object System.Windows.Forms.Label            # Create Label
-$browser.Text = "Browser"                                   # Text
-$browser.Location = New-Object System.Drawing.Point(5,10)  # Location
-$browser.AutoSize = $true                                   # Size of textfield
-$browser.Font = $header                                     # Font/fon-size
-$panel.Controls.Add($browser)                               # Add the label to the form
+$browser = New-header -name "Browser" -x 5 -y 10
+$panel1.Controls.Add($browser)                               # Add the label to the form
 
 #------Checkboxes------
+
 # Firefox
-$firefox = New-Object System.Windows.Forms.CheckBox         # Create Checkbox
-$firefox.Text = "Firefox"                                   # Text
-$firefox.Location = New-Object System.Drawing.Point(5,40)   # Location
-$firefox.AutoSize = $true                                   # Size of textfield
-$firefox.Font = $font                                       # Font/font-size
-$panel.Controls.Add($firefox)                               # Add Checkbox to the form
+$firefox = New-app -name "Firefox" -x 5 -y 40
+$panel1.Controls.Add($firefox)
 
 # Google Chrome
-$chrome = New-Object System.Windows.Forms.CheckBox
-$chrome.Text = "Google Chrome"
-$chrome.Location = New-Object System.Drawing.Point(5,60)
-$chrome.AutoSize = $true
-$chrome.Font = $font
-$panel.Controls.Add($chrome)
+$chrome = New-app -name "Google Chrome" -x 5 -y 60
+$panel1.Controls.Add($chrome)
 
 # Brave
-$brave = New-Object System.Windows.Forms.CheckBox
-$brave.Text = "Brave"
-$brave.Location = New-Object System.Drawing.Point(5,80)
-$brave.AutoSize = $true
-$brave.Font = $font
-$panel.Controls.Add($brave)
+$brave = New-app -name "Brave" -x 5 -y 80
+$panel1.Controls.Add($brave)
+
 
 # -----------------------------------------Development-------------------------------------------
 # 2nd panel
-$panel2 = New-Object System.Windows.Forms.Panel
-$panel2.Size = New-Object System.Drawing.Size(200,250)
-$panel2.Location = New-Object System.Drawing.Point(230, 10)      #20 space between panels
-$panel2.BackColor = "LightGray"
+$panel2 = New-panel -width 200 -height 250 -x 230 -y 10 -backcolor "LightGray"
 $Form.Controls.Add($panel2)
 
 #--------Header--------
-$develop = New-Object System.Windows.Forms.Label            
-$develop.Text = "Development"                                   
-$develop.Location = New-Object System.Drawing.Point(5,10)
-$develop.AutoSize = $true                                   
-$develop.Font = $header                                     
+$develop = New-header -name "Development" -x 5 -y 10                                                                                                     
 $panel2.Controls.Add($develop)         
 
 #------Checkboxes------
 # Visual Studio Code
-$vscode = New-Object System.Windows.Forms.CheckBox
-$vscode.Text = "Visual Studio Code"
-$vscode.Location = New-Object System.Drawing.Point(5,40)
-$vscode.AutoSize = $true
-$vscode.Font = $font
+$vscode = New-app -name "Visual Studio Code" -x 5 -y 40
 $panel2.Controls.Add($vscode)
 
 # Git
-$git = New-Object System.Windows.Forms.CheckBox
-$git.Text = "Git"
-$git.Location = New-Object System.Drawing.Point(5,60)
-$git.AutoSize = $true
-$git.Font = $font
+$git = New-app -name "Git" -x 5 -y 60
 $panel2.Controls.Add($git)
 
 # Oracle.jdk.22
-$jdk22 = New-Object System.Windows.Forms.CheckBox
-$jdk22.Text = "Oracle.jdk.22"
-$jdk22.Location = New-Object System.Drawing.Point(5,80)
-$jdk22.AutoSize = $true
-$jdk22.Font = $font
+$jdk22 = New-app -name "Oracle.jdk.22" -x 5 -y 80
 $panel2.Controls.Add($jdk22)
 
 # Powershell
-$powershell = New-Object System.Windows.Forms.CheckBox
-$powershell.Text = "Powershell"
-$powershell.Location = New-Object System.Drawing.Point(5,100)
-$powershell.AutoSize = $true
-$powershell.Font = $font
+$powershell = New-app -name "Powershell" -x 5 -y 100
 $panel2.Controls.Add($powershell)
 
 # Windows Terminal
-$winterminal = New-Object System.Windows.Forms.CheckBox
-$winterminal.Text = "Windows Terminal"
-$winterminal.Location = New-Object System.Drawing.Point(5,120)
-$winterminal.AutoSize = $true
-$winterminal.Font = $font
+$winterminal = New-app -name "Windows Terminal" -x 5 -y 120
 $panel2.Controls.Add($winterminal)
 
 # Oracle VM VirtualBox
-$vbox = New-Object System.Windows.Forms.CheckBox
-$vbox.Text = "Oracle VM VirtualBox"
-$vbox.Location = New-Object System.Drawing.Point(5,140)
-$vbox.AutoSize = $true
-$vbox.Font = $font
+$vbox = New-app -name "Oracle VM VirtualBox" -x 5 -y 140
 $panel2.Controls.Add($vbox)
 
 # Racket
-$racket = New-Object System.Windows.Forms.CheckBox
-$racket.Text = "Racket"
-$racket.Location = New-Object System.Drawing.Point(5,160)
-$racket.AutoSize = $true
-$racket.Font = $font
+$racket = New-app -name "Racket" -x 5 -y 160
 $panel2.Controls.Add($racket)
+
+# IntelliJ IDEA Community Edition
+$intellij = New-app -name "IntelliJ Community Edition" -x 5 -y 180
+$panel2.Controls.Add($intellij)
 
 # -------------------------------------------Document-------------------------------------------
 # 3rd panel
-$panel3 = New-Object System.Windows.Forms.Panel
-$panel3.Size = New-Object System.Drawing.Size(200,250)
-$panel3.Location = New-Object System.Drawing.Point(450, 10)      #20 space between panels
-$panel3.BackColor = "LightGray"
+$panel3 = New-panel -width 200 -height 250 -x 450 -y 10 -backcolor "LightGray"
 $Form.Controls.Add($panel3)
 
-#-------Dcoument-------
-$doc = New-Object System.Windows.Forms.Label            
-$doc.Text = "Document"                                   
-$doc.Location = New-Object System.Drawing.Point(5,10)
-$doc.AutoSize = $true                                   
-$doc.Font = $header                                     
-$panel3.Controls.Add($doc)    
+#--------Header--------
+$doc = New-header -name "Document" -x 5 -y 10                                                                                                     
+$panel3.Controls.Add($doc)   
 
 # Office 365
-$office365 = New-Object System.Windows.Forms.CheckBox
-$office365.Text = "Office 365"
-$office365.Location = New-Object System.Drawing.Point(5,40)
-$office365.AutoSize = $true
-$office365.Font = $font
+$office365 = New-app -name "Office 365" -x 5 -y 40
 $panel3.Controls.Add($office365)
 
 # LibreOffice
-$libreoffice = New-Object System.Windows.Forms.CheckBox
-$libreoffice.Text = "LibreOffice"
-$libreoffice.Location = New-Object System.Drawing.Point(5,60)
-$libreoffice.AutoSize = $true
-$libreoffice.Font = $font
+$libreoffice = New-app -name "LibreOffice" -x 5 -y 60
 $panel3.Controls.Add($libreoffice)
 
 # Notepad++
-$notepadqq = New-Object System.Windows.Forms.CheckBox
-$notepadqq.Text = "Notepad++"
-$notepadqq.Location = New-Object System.Drawing.Point(5,80)
-$notepadqq.AutoSize = $true
-$notepadqq.Font = $font
+$notepadqq = New-app -name "Notepad++" -x 5 -y 80
 $panel3.Controls.Add($notepadqq)
 
 # Obsidian
-$obsidian = New-Object System.Windows.Forms.CheckBox
-$obsidian.Text = "Obsidian"
-$obsidian.Location = New-Object System.Drawing.Point(5,100)
-$obsidian.AutoSize = $true
-$obsidian.Font = $font
+$obsidian = New-app -name "Obsidian" -x 5 -y 100
 $panel3.Controls.Add($obsidian)
 
 # Notion
-$notion = New-Object System.Windows.Forms.CheckBox
-$notion.Text = "Notion"
-$notion.Location = New-Object System.Drawing.Point(5,120)
-$notion.AutoSize = $true
-$notion.Font = $font
+$notion = New-app -name "Office 365" -x 5 -y 120
 $panel3.Controls.Add($notion)
 
 # Anki
-$anki = New-Object System.Windows.Forms.CheckBox
-$anki.Text = "Anki"
-$anki.Location = New-Object System.Drawing.Point(5,140)
-$anki.AutoSize = $true
-$anki.Font = $font
+$anki = New-app -name "Anki" -x 5 -y 140
 $panel3.Controls.Add($anki)
 
 # ----------------------------------------Communication------------------------------------------
 # 4th panel
-$panel4 = New-Object System.Windows.Forms.Panel
-$panel4.Size = New-Object System.Drawing.Size(200,250)
-$panel4.Location = New-Object System.Drawing.Point(670, 10)      #20 space between panels
-$panel4.BackColor = "LightGray"
+$panel4 = New-panel -width 200 -height 250 -x 670 -y 10 -backcolor "LightGray"
 $Form.Controls.Add($panel4)
 
-#-----Communication-----
-$communication = New-Object System.Windows.Forms.Label            
-$communication.Text = "Communication"                                   
-$communication.Location = New-Object System.Drawing.Point(5,10)
-$communication.AutoSize = $true                                   
-$communication.Font = $header                                     
-$panel4.Controls.Add($communication) 
+#--------Header--------
+$communication = New-header -name "Communication" -x 5 -y 10                                                                                                     
+$panel4.Controls.Add($communication)  
 
 # Discord
-$discord = New-Object System.Windows.Forms.CheckBox
-$discord.Text = "Discord"
-$discord.Location = New-Object System.Drawing.Point(5,40)
-$discord.AutoSize = $true
-$discord.Font = $font
+$discord = New-app -name "Discord" -x 5 -y 40
 $panel4.Controls.Add($discord)
 
 #-------------------------------------------Multimedia-------------------------------------------
 # 5th panel
-$panel5 = New-Object System.Windows.Forms.Panel
-$panel5.Size = New-Object System.Drawing.Size(200,250)
-$panel5.Location = New-Object System.Drawing.Point(890, 10)      #20 space between panels
-$panel5.BackColor = "LightGray"
+$panel5 = New-panel -width 200 -height 250 -x 890 -y 10 -backcolor "LightGray"
 $Form.Controls.Add($panel5)
 
-#------Multimedia------
-$multimedia = New-Object System.Windows.Forms.Label            
-$multimedia.Text = "Multimedia"                                   
-$multimedia.Location = New-Object System.Drawing.Point(5,10)
-$multimedia.AutoSize = $true                                   
-$multimedia.Font = $header                                     
-$panel5.Controls.Add($multimedia) 
+#--------Header--------
+$communication = New-header -name "Multimedia" -x 5 -y 10                                                                                                     
+$panel5.Controls.Add($communication) 
 
 # VLC media player
-$vlc = New-Object System.Windows.Forms.CheckBox
-$vlc.Text = "VLC media player"
-$vlc.Location = New-Object System.Drawing.Point(5,40)
-$vlc.AutoSize = $true
-$vlc.Font = $font
+$vlc = New-app -name "VLC media player" -x 5 -y 40
 $panel5.Controls.Add($vlc)
 
 # iTunes
-$itunes = New-Object System.Windows.Forms.CheckBox
-$itunes.Text = "iTunes"
-$itunes.Location = New-Object System.Drawing.Point(5,60)
-$itunes.AutoSize = $true
-$itunes.Font = $font
+$itunes = New-app -name "iTunes" -x 5 -y 60
 $panel5.Controls.Add($itunes)
 
 # OBS Studio
-$obs = New-Object System.Windows.Forms.CheckBox
-$obs.Text = "OBS Studio"
-$obs.Location = New-Object System.Drawing.Point(5,80)
-$obs.AutoSize = $true
-$obs.Font = $font
+$obs = New-app -name "OBS Studio" -x 5 -y 80
 $panel5.Controls.Add($obs)
 
 # -------------------------------------------Gaming----------------------------------------------
 # 6th panel
-$panel6 = New-Object System.Windows.Forms.Panel
-$panel6.Size = New-Object System.Drawing.Size(200,250)
-$panel6.Location = New-Object System.Drawing.Point(1110, 10)      #20 space between panels
-$panel6.BackColor = "LightGray"
+$panel6 = New-panel -width 200 -height 250 -x 1110 -y 10 -backcolor "LightGray"
 $Form.Controls.Add($panel6)
 
-#--------Gaming--------
-$gaming = New-Object System.Windows.Forms.Label            
-$gaming.Text = "Gaming"                                   
-$gaming.Location = New-Object System.Drawing.Point(5,10)
-$gaming.AutoSize = $true                                   
-$gaming.Font = $header                                     
+#--------Header--------
+$gaming = New-header -name "Gaming" -x 5 -y 10                                                                                                     
 $panel6.Controls.Add($gaming) 
 
-$steam = New-Object System.Windows.Forms.CheckBox
-$steam.Text = "Steam"
-$steam.Location = New-Object System.Drawing.Point(5,40)
-$steam.AutoSize = $true
-$steam.Font = $font
+# steam
+$steam = New-app -name "Steam" -x 5 -y 40
 $panel6.Controls.Add($steam)
 
-$epic = New-Object System.Windows.Forms.CheckBox
-$epic.Text = "Epic Games Launcher"
-$epic.Location = New-Object System.Drawing.Point(5,60)
-$epic.AutoSize = $true
-$epic.Font = $font
+# Epic Games Launcher
+$epic = New-app -name "Epic Games Launcher" -x 5 -y 60
 $panel6.Controls.Add($epic)
 
 # --------------------------------------------Tools----------------------------------------------
-# 6th panel
-$panel7 = New-Object System.Windows.Forms.Panel
-$panel7.Size = New-Object System.Drawing.Size(200,250)
-$panel7.Location = New-Object System.Drawing.Point(1330, 10)      #20 space between panels
-$panel7.BackColor = "LightGray"
+# 7th panel
+$panel7 = New-panel -width 200 -height 250 -x 1330 -y 10 -backcolor "LightGray"
 $Form.Controls.Add($panel7)
 
-#---------Tools--------
-$tools = New-Object System.Windows.Forms.Label            
-$tools.Text = "Tools"                                   
-$tools.Location = New-Object System.Drawing.Point(5,10)
-$tools.AutoSize = $true                                   
-$tools.Font = $header                                     
+#--------Header--------
+$tools = New-header -name "Tools" -x 5 -y 10                                                                                                     
 $panel7.Controls.Add($tools) 
 
 # 7zip
-$7zip = New-Object System.Windows.Forms.CheckBox
-$7zip.Text = "7zip"
-$7zip.Location = New-Object System.Drawing.Point(5,40)
-$7zip.AutoSize = $true
-$7zip.Font = $font
+$7zip = New-app -name "7zip" -x 5 -y 40
 $panel7.Controls.Add($7zip)
 
 # TranslucentTB
-$translucentTB = New-Object System.Windows.Forms.CheckBox
-$translucentTB.Text = "TranslucentTB"
-$translucentTB.Location = New-Object System.Drawing.Point(5,60)
-$translucentTB.AutoSize = $true
-$translucentTB.Font = $font
+$translucentTB = New-app -name "TranslucentTB" -x 5 -y 60
 $panel7.Controls.Add($translucentTB)
 
 # Microsoft Powertoys
-$powertoys = New-Object System.Windows.Forms.CheckBox
-$powertoys.Text = "Microsoft Powertoys"
-$powertoys.Location = New-Object System.Drawing.Point(5,80)
-$powertoys.AutoSize = $true
-$powertoys.Font = $font
+$powertoys = New-app -name "Microsoft Powertoys" -x 5 -y 80
 $panel7.Controls.Add($powertoys)
 
 # QuickLook
-$quicklook = New-Object System.Windows.Forms.CheckBox
-$quicklook.Text = "QuickLook"
-$quicklook.Location = New-Object System.Drawing.Point(5,100)
-$quicklook.AutoSize = $true
-$quicklook.Font = $font
+$quicklook = New-app -name "QickLook" -x 5 -y 100
 $panel7.Controls.Add($quicklook)
 
 # Speedtest by Ookla
-$speedtest = New-Object System.Windows.Forms.CheckBox
-$speedtest.Text = "Speedtest by Ookla"
-$speedtest.Location = New-Object System.Drawing.Point(5,120)
-$speedtest.AutoSize = $true
-$speedtest.Font = $font
+$speedtest = New-app -name "Speedtest by Ookla" -x 5 -y 120
 $panel7.Controls.Add($speedtest)
 
 # Garmin Express
-$garmin = New-Object System.Windows.Forms.CheckBox
-$garmin.Text = "Garmin Express"
-$garmin.Location = New-Object System.Drawing.Point(5,140)
-$garmin.AutoSize = $true
-$garmin.Font = $font
+$garmin = New-app -name "Garmin Express" -x 5 -y 140
 $panel7.Controls.Add($garmin)
 
 # Oh-my-posh
-$posh = New-Object System.Windows.Forms.CheckBox
-$posh.Text = "Oh-my-posh"
-$posh.Location = New-Object System.Drawing.Point(5,160)
-$posh.AutoSize = $true
-$posh.Font = $font
+$posh = New-app -name "Oh-my-posh" -x 5 -y 160
 $panel7.Controls.Add($posh)
 
 # --------------------------------------------Button---------------------------------------------
 
+function New-button {
+    param (
+        [string]$name,
+        [int]$x,
+        [int]$y
+    )
+    $button = New-Object System.Windows.Forms.Button
+    $button.Text = "$name"
+    $button.Location = New-Object System.Drawing.Point($x,$y)
+    $button.Size = New-Object System.Drawing.Size(75, 23)
+    $button.ForeColor = [System.Drawing.Color]::White
+    $button.BackColor = [System.Drawing.Color]::FromArgb(70, 70, 70)
+
+    return $button
+}
+
 # Update
-$update = New-Object System.Windows.Forms.Button
-$update.Text = "Update"
-$update.Location = New-Object System.Drawing.Point(1275,275)
-$update.Size = New-Object System.Drawing.Size(75, 23)
-$update.ForeColor = $textColor
-$update.BackColor = $buttonColor
+$update = New-button -name "Update" -x 1275 -y 275
 $Form.Controls.Add($update)
 
 # Install
-$install = New-Object System.Windows.Forms.Button
-$install.Text = "Install"
-$install.Location = New-Object System.Drawing.Point(1365,275)
-$install.Size = New-Object System.Drawing.Size(75, 23)
-$install.ForeColor = $textColor
-$install.BackColor = $buttonColor
+$install = New-button -name "Install" -x 1365 -y 275
 $Form.Controls.Add($install)
 
 # finish
-$finish = New-Object System.Windows.Forms.Button
-$finish.Text = "Finish"
-$finish.Location = New-Object System.Drawing.Point(1455,275)
-$finish.Size = New-Object System.Drawing.Size(75, 23)
-$finish.ForeColor = $textColor
-$finish.BackColor = $buttonColor
+$finish = New-button -name "Finish" -x 1455 -y 275
 $Form.Controls.Add($finish)
 
 # Check authors apps
-$my = New-Object System.Windows.Forms.Button
-$my.Text = "Check My"
-$my.Location = New-Object System.Drawing.Point(10,275)
-$my.Size = New-Object System.Drawing.Size(75, 23)
-$my.ForeColor = $textColor
-$my.BackColor = $buttonColor
+$my = New-button -name "Check My" -x 10 -y 275
 $Form.Controls.Add($my)
 
 # Check all apps
-$all = New-Object System.Windows.Forms.Button
-$all.Text = "Check All"
-$all.Location = New-Object System.Drawing.Point(100,275)
-$all.Size = New-Object System.Drawing.Size(75, 23)
-$all.ForeColor = $textColor
-$all.BackColor = $buttonColor
+$all = New-button -name "Check All" -x 100 -y 275
 $Form.Controls.Add($all)
 
 # Install Button when clicked
+function check {
+    param (
+        [string]$name,
+        [string]$id
+    )
+    Write-Host "Installing " -NoNewline
+        Write-Host "'$name'" -NoNewline -ForegroundColor Yellow 
+        Write-Host "..." 
+        Start-Process -FilePath "winget" -ArgumentList "install $id -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+}
+
 $install.Add_Click({
     # Browser
     if ($firefox.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Firefox'" -NoNewline -ForegroundColor Yellow 
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Mozilla.Firefox -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Firefox" -id "Mozilla.Firefox"
     }
     if ($chrome.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Google Chrome'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Google.Chrome -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Google Chrome" -id "Google.Chrome"
     }
     if ($brave.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Brave'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Brave.Brave -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Brave" -id "Brave.Brave"
     }
     # Development
     if ($vscode.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Visual Studio Code'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.VisualStudioCode -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Visual Studio Code" -id "Microsoft.VisualStudioCode"
     }
     if ($git.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Git'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Git.Git -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Git" -id "Git.Git"
     }
     if ($jdk22.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Oracle.jdk.22'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Oracle.JDK.22 -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Oracle.jdk.22" -id "Oracle.JDK.22"
     }
     if ($powershell.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Powershell'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.PowerShell -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Powershell" -id "Microsoft.PowerShell"
     }
     if ($winterminal.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Windows Terminal'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..."
-        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.WindowsTerminal -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Windows Terminal" -id "Microsoft.WindowsTerminal"
     }
     if ($vbox.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'VirtualBox'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..."    
-        Start-Process -FilePath "winget" -ArgumentList "install Oracle.VirtualBox -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "VirtualBox" -id "Oracle.VirtualBox"
     }
     if ($racket.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Racket'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..."    
-        Start-Process -FilePath "winget" -ArgumentList "install Racket.Racket -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Racket" -id "Racket.Racket"
+    }
+    if ($intellij.Checked) {
+        check -name "IntelliJ IDEA Community Edition" -id "JetBrains.IntelliJIDEA.Community"
     }
     # Document
     if ($office365.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Office 365'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.Office -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Office 365" -id "Microsoft.Office"
     }
     if ($libreoffice.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'LibreOffice'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install TheDocumentFoundation.LibreOffice -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "LibreOffice" -id "TheDocumentFoundation.LibreOffice"
     }
     if ($notepadqq.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Notepad++'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..."     
-        Start-Process -FilePath "winget" -ArgumentList "install Notepad++.Notepad++ -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Notepad++" -id "Notepad++.Notepad++"
     }
     if ($obsidian.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Obsidian'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Obsidian.Obsidian -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Obsidian" -id "Obsidian.Obsidian"
     }
     if ($notion.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Notion'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Notion.Notion -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Notion" -id "Notion.Notion"
     }
     if ($anki.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Anki'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Anki.Anki -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Anki" -id "Anki.Anki"
     }
     # Communication
     if ($discord.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Discord'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Discord.Discord -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Discord" -id "Discord.Discord"
     }
     # Multimedia
     if ($vlc.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'VLC media player'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install VideoLAN.VLC -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "VLC media player" -id "VideoLAN.VLC"
     }
     if ($itunes.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'iTunes'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Apple.iTunes -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "iTunes" -id "Apple.iTunes"
     }
     if ($obs.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'OBS Studio'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install OBSProject.OBSStudio -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "OBS Studio" -id "OBSProject.OBSStudio"
     }
     # Gaming
     if ($steam.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Steam'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Valve.Steam -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Steam" -id "Valve.Steam"
     }
     if ($epic.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Epic Games Launcher'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install EpicGames.EpicGamesLauncher -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Epic Games Launcher" -id "EpicGames.EpicGamesLauncher"
     }
     # Tools
     if ($7zip.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'7zip'" -NoNewline -ForegroundColor Yellow -Verbose
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install 7zip.7zip -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "7zip" -id "7zip.7zip"
     }
     if ($translucentTB.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'TranslucentTB'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install CharlesMilette.TranslucentTB -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
-
+        check -name "TranslucentTB" -id "CharlesMilette.TranslucentTB"
     }
     if ($powertoys.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Microsoft Powertoys'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Microsoft.PowerToys -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Microsoft Powertoys" -id "Microsoft.PowerToys"
     }
     if ($quicklook.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'QuickLook'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install QL-Win.QuickLook -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "QuickLook" -id "QL-Win.QuickLook"
     }
     if ($speedtest.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Speedtest by Ookla'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Ookla.Speedtest.Desktop -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Speedtest by Ookla" -id "Ookla.Speedtest.Desktop"
     }
     if ($garmin.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Garmin Express'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install Garmin.Express -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Garmin Express" -id "Garmin.Express"
     }
     if ($posh.Checked) {
-        Write-Host "Installing " -NoNewline
-        Write-Host "'Oh-my-posh'" -NoNewline -ForegroundColor Yellow
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install JanDeDobbeleer.OhMyPosh -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+        check -name "Oh-my-posh" -id "JanDeDobbeleer.OhMyPosh"
     }
     Start-Sleep -Seconds 1
     Write-Host $line -ForegroundColor Blue
-    Write-Host "Installationen der Apps wurden abgschlossen!" -ForegroundColor Green
+    Write-Host "Installation finished!" -ForegroundColor Green
+    Write-Host $line -ForegroundColor Blue
     Write-Host ""
 })
 
@@ -625,6 +423,7 @@ $my.Add_Click({
     $winterminal.Checked = $true
     $vbox.Checked = $true
     $racket.Checked = $true
+    $intellij.Checked = $true
     # Document
     $office365.Checked = $false
     $libreoffice.Checked = $false
@@ -667,6 +466,7 @@ $all.Add_Click({
     $winterminal.Checked = $true
     $vbox.Checked = $true
     $racket.Checked = $true
+    $intellij.Checked = $true
     # Document
     $office365.Checked = $true
     $libreoffice.Checked = $true
@@ -699,6 +499,12 @@ $all.Add_Click({
 $update.Add_Click({
     # Update all apps via winget
     Start-Process -FilePath "winget" -ArgumentList "upgrade --all" -NoNewWindow -Wait -PassThru
+
+    Start-Sleep -Seconds 1
+    Write-Host $line -ForegroundColor Blue
+    Write-Host "Updates finished!" -ForegroundColor Green
+    Write-Host $line -ForegroundColor Blue
+    Write-Host ""
 })
 
 # Finish button when clicked
