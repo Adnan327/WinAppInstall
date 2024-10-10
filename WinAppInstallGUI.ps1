@@ -30,7 +30,7 @@ function New-panel {
     )
     # create new panel-objekt
     $panel = New-Object System.Windows.Forms.Panel
-    $panel.Size = New-Object System.Drawing.Size($width,$height)
+    $panel.Size = New-Object System.Drawing.Size($width, $height)
     $panel.Location = New-Object System.Drawing.Point($x, $y)
     $panel.BackColor = "LightGray"
 
@@ -46,7 +46,7 @@ function New-header {
     )
     $header = New-Object System.Windows.Forms.Label
     $header.Text = "$name" 
-    $header.Location = New-Object System.Drawing.Point($x,$y)
+    $header.Location = New-Object System.Drawing.Point($x, $y)
     $header.AutoSize = $true
     $header.Font = New-Object System.Drawing.Font("Arial", 12)  
 
@@ -61,7 +61,7 @@ function New-app {
     )
     $app = New-Object System.Windows.Forms.CheckBox             # Create Checkbox
     $app.Text = "$name"                                         # Text
-    $app.Location = New-Object System.Drawing.Point($x,$y)      # Location
+    $app.Location = New-Object System.Drawing.Point($x, $y)      # Location
     $app.AutoSize = $true                                       # Size of textfield
     $app.Font = New-Object System.Drawing.Font("Arial", 11)     # Font/font-size
 
@@ -254,6 +254,10 @@ $panel7.Controls.Add($garmin)
 $posh = New-app -name "Oh-my-posh" -x 5 -y 160
 $panel7.Controls.Add($posh)
 
+# Bitwarden
+$bitwarden = New-app -name "Bitwarden" -x 5 -y 180
+$panel7.Controls.Add($bitwarden)
+
 # --------------------------------------------Button---------------------------------------------
 
 function New-button {
@@ -264,7 +268,7 @@ function New-button {
     )
     $button = New-Object System.Windows.Forms.Button
     $button.Text = "$name"
-    $button.Location = New-Object System.Drawing.Point($x,$y)
+    $button.Location = New-Object System.Drawing.Point($x, $y)
     $button.Size = New-Object System.Drawing.Size(75, 23)
     $button.ForeColor = [System.Drawing.Color]::White
     $button.BackColor = [System.Drawing.Color]::FromArgb(70, 70, 70)
@@ -299,218 +303,223 @@ function check {
         [string]$id
     )
     Write-Host "Installing " -NoNewline
-        Write-Host "'$name'" -NoNewline -ForegroundColor Yellow 
-        Write-Host "..." 
-        Start-Process -FilePath "winget" -ArgumentList "install $id -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
+    Write-Host "'$name'" -NoNewline -ForegroundColor Yellow 
+    Write-Host "..." 
+    Start-Process -FilePath "winget" -ArgumentList "install $id -h --accept-package-agreements --accept-source-agreements" -NoNewWindow -Wait -PassThru
 }
 
 $install.Add_Click({
-    # Browser
-    if ($firefox.Checked) {
-        check -name "Firefox" -id "Mozilla.Firefox"
-    }
-    if ($chrome.Checked) {
-        check -name "Google Chrome" -id "Google.Chrome"
-    }
-    if ($brave.Checked) {
-        check -name "Brave" -id "Brave.Brave"
-    }
-    # Development
-    if ($vscode.Checked) {
-        check -name "Visual Studio Code" -id "Microsoft.VisualStudioCode"
-    }
-    if ($git.Checked) {
-        check -name "Git" -id "Git.Git"
-    }
-    if ($jdk22.Checked) {
-        check -name "Oracle.jdk.22" -id "Oracle.JDK.22"
-    }
-    if ($powershell.Checked) {
-        check -name "Powershell" -id "Microsoft.PowerShell"
-    }
-    if ($winterminal.Checked) {
-        check -name "Windows Terminal" -id "Microsoft.WindowsTerminal"
-    }
-    if ($vbox.Checked) {
-        check -name "VirtualBox" -id "Oracle.VirtualBox"
-    }
-    if ($racket.Checked) {
-        check -name "Racket" -id "Racket.Racket"
-    }
-    if ($intellij.Checked) {
-        check -name "IntelliJ IDEA Community Edition" -id "JetBrains.IntelliJIDEA.Community"
-    }
-    # Document
-    if ($office365.Checked) {
-        check -name "Office 365" -id "Microsoft.Office"
-    }
-    if ($libreoffice.Checked) {
-        check -name "LibreOffice" -id "TheDocumentFoundation.LibreOffice"
-    }
-    if ($notepadqq.Checked) {
-        check -name "Notepad++" -id "Notepad++.Notepad++"
-    }
-    if ($obsidian.Checked) {
-        check -name "Obsidian" -id "Obsidian.Obsidian"
-    }
-    if ($notion.Checked) {
-        check -name "Notion" -id "Notion.Notion"
-    }
-    if ($anki.Checked) {
-        check -name "Anki" -id "Anki.Anki"
-    }
-    # Communication
-    if ($discord.Checked) {
-        check -name "Discord" -id "Discord.Discord"
-    }
-    # Multimedia
-    if ($vlc.Checked) {
-        check -name "VLC media player" -id "VideoLAN.VLC"
-    }
-    if ($itunes.Checked) {
-        check -name "iTunes" -id "Apple.iTunes"
-    }
-    if ($obs.Checked) {
-        check -name "OBS Studio" -id "OBSProject.OBSStudio"
-    }
-    # Gaming
-    if ($steam.Checked) {
-        check -name "Steam" -id "Valve.Steam"
-    }
-    if ($epic.Checked) {
-        check -name "Epic Games Launcher" -id "EpicGames.EpicGamesLauncher"
-    }
-    # Tools
-    if ($7zip.Checked) {
-        check -name "7zip" -id "7zip.7zip"
-    }
-    if ($translucentTB.Checked) {
-        check -name "TranslucentTB" -id "CharlesMilette.TranslucentTB"
-    }
-    if ($powertoys.Checked) {
-        check -name "Microsoft Powertoys" -id "Microsoft.PowerToys"
-    }
-    if ($quicklook.Checked) {
-        check -name "QuickLook" -id "QL-Win.QuickLook"
-    }
-    if ($speedtest.Checked) {
-        check -name "Speedtest by Ookla" -id "Ookla.Speedtest.Desktop"
-    }
-    if ($garmin.Checked) {
-        check -name "Garmin Express" -id "Garmin.Express"
-    }
-    if ($posh.Checked) {
-        check -name "Oh-my-posh" -id "JanDeDobbeleer.OhMyPosh"
-    }
-    Start-Sleep -Seconds 1
-    Write-Host $line -ForegroundColor Blue
-    Write-Host "Installation finished!" -ForegroundColor Green
-    Write-Host $line -ForegroundColor Blue
-    Write-Host ""
-})
+        # Browser
+        if ($firefox.Checked) {
+            check -name "Firefox" -id "Mozilla.Firefox"
+        }
+        if ($chrome.Checked) {
+            check -name "Google Chrome" -id "Google.Chrome"
+        }
+        if ($brave.Checked) {
+            check -name "Brave" -id "Brave.Brave"
+        }
+        # Development
+        if ($vscode.Checked) {
+            check -name "Visual Studio Code" -id "Microsoft.VisualStudioCode"
+        }
+        if ($git.Checked) {
+            check -name "Git" -id "Git.Git"
+        }
+        if ($jdk22.Checked) {
+            check -name "Oracle.jdk.22" -id "Oracle.JDK.22"
+        }
+        if ($powershell.Checked) {
+            check -name "Powershell" -id "Microsoft.PowerShell"
+        }
+        if ($winterminal.Checked) {
+            check -name "Windows Terminal" -id "Microsoft.WindowsTerminal"
+        }
+        if ($vbox.Checked) {
+            check -name "VirtualBox" -id "Oracle.VirtualBox"
+        }
+        if ($racket.Checked) {
+            check -name "Racket" -id "Racket.Racket"
+        }
+        if ($intellij.Checked) {
+            check -name "IntelliJ IDEA Community Edition" -id "JetBrains.IntelliJIDEA.Community"
+        }
+        # Document
+        if ($office365.Checked) {
+            check -name "Office 365" -id "Microsoft.Office"
+        }
+        if ($libreoffice.Checked) {
+            check -name "LibreOffice" -id "TheDocumentFoundation.LibreOffice"
+        }
+        if ($notepadqq.Checked) {
+            check -name "Notepad++" -id "Notepad++.Notepad++"
+        }
+        if ($obsidian.Checked) {
+            check -name "Obsidian" -id "Obsidian.Obsidian"
+        }
+        if ($notion.Checked) {
+            check -name "Notion" -id "Notion.Notion"
+        }
+        if ($anki.Checked) {
+            check -name "Anki" -id "Anki.Anki"
+        }
+        # Communication
+        if ($discord.Checked) {
+            check -name "Discord" -id "Discord.Discord"
+        }
+        # Multimedia
+        if ($vlc.Checked) {
+            check -name "VLC media player" -id "VideoLAN.VLC"
+        }
+        if ($itunes.Checked) {
+            check -name "iTunes" -id "Apple.iTunes"
+        }
+        if ($obs.Checked) {
+            check -name "OBS Studio" -id "OBSProject.OBSStudio"
+        }
+        # Gaming
+        if ($steam.Checked) {
+            check -name "Steam" -id "Valve.Steam"
+        }
+        if ($epic.Checked) {
+            check -name "Epic Games Launcher" -id "EpicGames.EpicGamesLauncher"
+        }
+        # Tools
+        if ($7zip.Checked) {
+            check -name "7zip" -id "7zip.7zip"
+        }
+        if ($translucentTB.Checked) {
+            check -name "TranslucentTB" -id "CharlesMilette.TranslucentTB"
+        }
+        if ($powertoys.Checked) {
+            check -name "Microsoft Powertoys" -id "Microsoft.PowerToys"
+        }
+        if ($quicklook.Checked) {
+            check -name "QuickLook" -id "QL-Win.QuickLook"
+        }
+        if ($speedtest.Checked) {
+            check -name "Speedtest by Ookla" -id "Ookla.Speedtest.Desktop"
+        }
+        if ($garmin.Checked) {
+            check -name "Garmin Express" -id "Garmin.Express"
+        }
+        if ($posh.Checked) {
+            check -name "Oh-my-posh" -id "JanDeDobbeleer.OhMyPosh"
+        }
+        if ($bitwarden.Checked) {
+            check -name "Bitwarden" -id "Bitwarden.Bitwarden"
+        }
+        Start-Sleep -Seconds 1
+        Write-Host $line -ForegroundColor Blue
+        Write-Host "Installation finished!" -ForegroundColor Green
+        Write-Host $line -ForegroundColor Blue
+        Write-Host ""
+    })
 
 # Check my button when clicked
 $my.Add_Click({
-    # Browser
-    $firefox.Checked = $true
-    $chrome.Checked = $false
-    $brave.Checked = $true
-    # Development
-    $vscode.Checked = $true
-    $git.Checked = $true
-    $jdk22.Checked = $true
-    $powershell.Checked = $true
-    $winterminal.Checked = $true
-    $vbox.Checked = $true
-    $racket.Checked = $true
-    $intellij.Checked = $true
-    # Document
-    $office365.Checked = $false
-    $libreoffice.Checked = $false
-    $notepadqq.Checked = $true
-    $obsidian.Checked = $true
-    $notion.Checked = $true
-    $anki.Checked = $true
-    # Communication
-    $discord.Checked = $true
-    # Gaming
-    $steam.Checked = $false
-    $epic.Checked = $false
-    # Multimedia
-    $vlc.Checked = $true
-    $itunes.Checked = $true
-    $obs.Checked = $false
-    # Tools
-    $7zip.Checked = $true
-    $translucentTB.Checked = $true
-    $powertoys.Checked = $true
-    $quicklook.Checked = $true
-    $speedtest.Checked = $true
-    $garmin.Checked = $true
-    $posh.Checked = $true  
+        # Browser
+        $firefox.Checked = $true
+        $chrome.Checked = $false
+        $brave.Checked = $true
+        # Development
+        $vscode.Checked = $true
+        $git.Checked = $true
+        $jdk22.Checked = $true
+        $powershell.Checked = $true
+        $winterminal.Checked = $true
+        $vbox.Checked = $true
+        $racket.Checked = $true
+        $intellij.Checked = $true
+        # Document
+        $office365.Checked = $false
+        $libreoffice.Checked = $false
+        $notepadqq.Checked = $true
+        $obsidian.Checked = $true
+        $notion.Checked = $true
+        $anki.Checked = $true
+        # Communication
+        $discord.Checked = $true
+        # Gaming
+        $steam.Checked = $false
+        $epic.Checked = $false
+        # Multimedia
+        $vlc.Checked = $true
+        $itunes.Checked = $true
+        $obs.Checked = $false
+        # Tools
+        $7zip.Checked = $true
+        $translucentTB.Checked = $true
+        $powertoys.Checked = $true
+        $quicklook.Checked = $true
+        $speedtest.Checked = $true
+        $garmin.Checked = $true
+        $posh.Checked = $true
+        $bitwarden.Checked = $true
 
-    Write-Host "Checked authors boxes"
-})
+        Write-Host "Checked authors boxes"
+    })
 
 # Check all button when clicked
 $all.Add_Click({
-    # Browser
-    $firefox.Checked = $true
-    $chrome.Checked = $true
-    $brave.Checked = $true
-    # Development
-    $vscode.Checked = $true
-    $git.Checked = $true
-    $jdk22.Checked = $true
-    $powershell.Checked = $true
-    $winterminal.Checked = $true
-    $vbox.Checked = $true
-    $racket.Checked = $true
-    $intellij.Checked = $true
-    # Document
-    $office365.Checked = $true
-    $libreoffice.Checked = $true
-    $notepadqq.Checked = $true
-    $obsidian.Checked = $true
-    $notion.Checked = $true
-    $anki.Checked = $true
-    # Communication
-    $discord.Checked = $true
-    # Gaming
-    $steam.Checked = $true
-    $epic.Checked = $true
-    # Multimedia
-    $vlc.Checked = $true
-    $itunes.Checked = $true
-    $obs.Checked = $true
-    # Tools
-    $7zip.Checked = $true
-    $translucentTB.Checked = $true
-    $powertoys.Checked = $true
-    $quicklook.Checked = $true
-    $speedtest.Checked = $true
-    $garmin.Checked = $true
-    $posh.Checked = $true
+        # Browser
+        $firefox.Checked = $true
+        $chrome.Checked = $true
+        $brave.Checked = $true
+        # Development
+        $vscode.Checked = $true
+        $git.Checked = $true
+        $jdk22.Checked = $true
+        $powershell.Checked = $true
+        $winterminal.Checked = $true
+        $vbox.Checked = $true
+        $racket.Checked = $true
+        $intellij.Checked = $true
+        # Document
+        $office365.Checked = $true
+        $libreoffice.Checked = $true
+        $notepadqq.Checked = $true
+        $obsidian.Checked = $true
+        $notion.Checked = $true
+        $anki.Checked = $true
+        # Communication
+        $discord.Checked = $true
+        # Gaming
+        $steam.Checked = $true
+        $epic.Checked = $true
+        # Multimedia
+        $vlc.Checked = $true
+        $itunes.Checked = $true
+        $obs.Checked = $true
+        # Tools
+        $7zip.Checked = $true
+        $translucentTB.Checked = $true
+        $powertoys.Checked = $true
+        $quicklook.Checked = $true
+        $speedtest.Checked = $true
+        $garmin.Checked = $true
+        $posh.Checked = $true
+        $bitwarden.Checked = $true
 
-    Write-Host "Checked all boxes" 
-})   
+        Write-Host "Checked all boxes" 
+    })   
 
 # Update button when clicked
 $update.Add_Click({
-    # Update all apps via winget
-    Start-Process -FilePath "winget" -ArgumentList "upgrade --all" -NoNewWindow -Wait -PassThru
+        # Update all apps via winget
+        Start-Process -FilePath "winget" -ArgumentList "upgrade --all" -NoNewWindow -Wait -PassThru
 
-    Start-Sleep -Seconds 1
-    Write-Host $line -ForegroundColor Blue
-    Write-Host "Updates finished!" -ForegroundColor Green
-    Write-Host $line -ForegroundColor Blue
-    Write-Host ""
-})
+        Start-Sleep -Seconds 1
+        Write-Host $line -ForegroundColor Blue
+        Write-Host "Updates finished!" -ForegroundColor Green
+        Write-Host $line -ForegroundColor Blue
+        Write-Host ""
+    })
 
 # Finish button when clicked
 $finish.Add_Click({
-    $Form.Close()               # This will close the form
-})
+        $Form.Close()               # This will close the form
+    })
 
 # Show the form
 $Form.ShowDialog()
