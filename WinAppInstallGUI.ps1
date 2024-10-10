@@ -159,7 +159,7 @@ $obsidian = New-app -name "Obsidian" -x 5 -y 100
 $panel3.Controls.Add($obsidian)
 
 # Notion
-$notion = New-app -name "Office 365" -x 5 -y 120
+$notion = New-app -name "Notion" -x 5 -y 120
 $panel3.Controls.Add($notion)
 
 # Anki

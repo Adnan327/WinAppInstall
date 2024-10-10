@@ -8,8 +8,8 @@ I am open to suggestions for improvement.
 ## List of apps:
 
 **Browser**
-- Google Chrome
 - Firefox
+- Google Chrome
 - Brave
 
 **Development**
@@ -18,13 +18,16 @@ I am open to suggestions for improvement.
 - Oracle.jdk.22
 - Powershell
 - Windows Terminal
-- Virtual Box
+- Oracle VM VirtualBox
+- Racket
+- IntelliJ Community Edition
 
 **Document**
 - Office 365
 - LibreOffice
 - Notepad++
 - Obsidian
+- Notion
 - Anki
 
 **Communication**
@@ -35,11 +38,19 @@ I am open to suggestions for improvement.
 - iTunes
 - OBS Studio
 
+**Gaming**
+- Steam
+- Epic Games Launcher
+
 **Tools**
 - 7zip
 - TranslucentTB
 - Microsoft Powertoys
 - Quicklook
+- Speedtest by Ookla
+- Garmin Express
+- Oh-my-posh
+- Bitwarden
 
 
 
